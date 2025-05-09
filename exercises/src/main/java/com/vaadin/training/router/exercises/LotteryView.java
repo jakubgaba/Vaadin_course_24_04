@@ -15,10 +15,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 @Route("lottery")
-public class LotteryView extends Composite<Div> implements HasComponents{
+public class LotteryView extends Composite<Div> implements HasComponents {
 
     private final Div lotteryResult = new Div();
     StringBuilder titleName = new StringBuilder();
+
     public LotteryView() {
         add(new Span("Lottery View"));
 
@@ -31,15 +32,16 @@ public class LotteryView extends Composite<Div> implements HasComponents{
             if (isNotEmpty(value)) {
                 final Integer number = Integer.parseInt(value);
                 validate(number);
-                titleName.append("Lottery View: ").append(number);
-                UI.getCurrent().getPage().setTitle(String.valueOf(titleName));
-                
                 updateContent(number);
             }
         });
         button.setEnabled(false);
-        numberInput.addValueChangeListener(e -> button.setEnabled(isNotEmpty(e.getValue())));
-        
+        numberInput.addValueChangeListener(e -> {
+            button.setEnabled(isNotEmpty(e.getValue()));
+            UI.getCurrent().getPage().setTitle("Lottery view: " + e.getValue());
+        }
+        );
+
         inputBar.add(button);
         add(inputBar);
         add(lotteryResult);
@@ -67,10 +69,8 @@ public class LotteryView extends Composite<Div> implements HasComponents{
             if (number < 1 || number > 10) {
                 throw new InvalidValueException();
             }
-           
+
         }
     }
 
-    
- 
 }
