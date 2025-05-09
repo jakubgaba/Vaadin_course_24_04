@@ -1,5 +1,9 @@
 package com.vaadin.training.router.exercises;
 
+import java.util.Random;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.button.Button;
@@ -8,11 +12,9 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
 
-import java.util.Random;
-
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-
+@Route("lottery")
 public class LotteryView extends Composite<VerticalLayout> implements HasComponents {
 
     private final Div lotteryResult = new Div();
