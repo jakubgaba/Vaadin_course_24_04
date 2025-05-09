@@ -6,19 +6,19 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 @Route("lottery")
-public class LotteryView extends Composite<VerticalLayout> implements HasComponents {
+public class LotteryView extends Composite<Div> implements HasComponents{
 
     private final Div lotteryResult = new Div();
-
+    StringBuilder titleName = new StringBuilder();
     public LotteryView() {
         add(new Span("Lottery View"));
 
@@ -31,11 +31,15 @@ public class LotteryView extends Composite<VerticalLayout> implements HasCompone
             if (isNotEmpty(value)) {
                 final Integer number = Integer.parseInt(value);
                 validate(number);
+                titleName.append("Lottery View: ").append(number);
+                UI.getCurrent().getPage().setTitle(String.valueOf(titleName));
+                
                 updateContent(number);
             }
         });
         button.setEnabled(false);
         numberInput.addValueChangeListener(e -> button.setEnabled(isNotEmpty(e.getValue())));
+        
         inputBar.add(button);
         add(inputBar);
         add(lotteryResult);
@@ -63,7 +67,10 @@ public class LotteryView extends Composite<VerticalLayout> implements HasCompone
             if (number < 1 || number > 10) {
                 throw new InvalidValueException();
             }
+           
         }
     }
 
+    
+ 
 }
