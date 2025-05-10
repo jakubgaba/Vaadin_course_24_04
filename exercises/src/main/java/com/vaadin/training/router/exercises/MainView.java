@@ -4,6 +4,7 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -12,7 +13,7 @@ import com.vaadin.flow.router.RouterLink;
 
 @Route("")
 @RouteAlias("menu")
-public class MainView extends Composite<VerticalLayout> implements HasComponents {
+public class MainView extends Composite<VerticalLayout> implements HasComponents, {
     
     private final Div childWrapper = new Div();
     public MainView(){
@@ -34,5 +35,12 @@ public class MainView extends Composite<VerticalLayout> implements HasComponents
 
         H1 footer = new H1("Footer");
         add(footer);
+
+        getContent().setFlexGrow(1, menu);
+        getContent().setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER, header);
+        getContent().setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER, footer);
+        getContent().setHorizontalComponentAlignment(FlexComponent.Alignment.STRETCH, menu);
+
+
     }
 }
