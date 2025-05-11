@@ -17,7 +17,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 
-@Route("lottery")
+@Route(value = "lottery")
 public class LotteryView extends Composite<Div> implements HasComponents, HasUrlParameter<String> {
 
     private final Div lotteryResult = new Div();
