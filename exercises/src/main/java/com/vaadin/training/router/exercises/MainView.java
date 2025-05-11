@@ -3,20 +3,19 @@ package com.vaadin.training.router.exercises;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.charts.model.TextAlign;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.VaadinSession;
 
 
-public class MainView extends Composite<VerticalLayout> implements HasComponents, RouterLayout {
+public class MainView extends Composite<VerticalLayout> implements HasComponents, RouterLayout, BeforeEnterObserver {
     
     private final Div childWrapper = new Div();
     public MainView(){
@@ -52,6 +51,17 @@ public class MainView extends Composite<VerticalLayout> implements HasComponents
         getContent().setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER, footer);
         getContent().setHorizontalComponentAlignment(FlexComponent.Alignment.STRETCH, menu);
 
+       
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+       VaadinSession session = VaadinSession.getCurrent();
+       System.out.println(session.getAttribute("userLoggedIn"));
+       if(session.getAttribute("userLoggedIn") == null) {
+        event.rerouteTo(LoginView.class);
+       }
+       
     }
 
     @Override
