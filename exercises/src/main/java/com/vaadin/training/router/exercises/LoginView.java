@@ -19,9 +19,11 @@ public class LoginView extends Composite<Div> implements HasComponents {
         Button loginButton = new Button("Login", e -> {
             VaadinSession.getCurrent().setAttribute("userLoggedIn", true);
             UI.getCurrent().navigate("");
+            System.out.println("Session ID: " + VaadinSession.getCurrent().getSession().getId());
         });
         loginDiv.add(loginButton);
         add(loginDiv);
     }
 
 }
+// 82DFB64CA8C6D08BF5ADBD3FAC4A00E5
